@@ -6,7 +6,7 @@
   --light-color: #ecf0f1;
   --lose-color: #e74c3c;
   --win-color: #16a085;
-  --modal-duration: 1s;
+  --modal-duration: 0.5s;
 }
 
 * {
@@ -18,12 +18,20 @@
 body {
   font-family: "Roboto", sans-serif;
   line-height: 1.6;
-  background: white;
-  color: #333;
+  background: url(./img/bg.jpg);
+  background-size: 100%;
+}
+
+img{
+  border-radius: 50%;
+}
+
+h2{
+  color: var(--light-color);
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1500px;
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
@@ -116,7 +124,7 @@ body {
 .modal-content {
   background: white;
   text-align: center;
-  width: 350px;
+  width: 500px;
   margin: 10% auto;
   border-radius: 10px;
   padding: 3rem;

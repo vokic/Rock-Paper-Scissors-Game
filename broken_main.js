@@ -2,22 +2,32 @@ const choices = document.querySelectorAll(".choice");
 const score = document.getElementById("score");
 const result = document.getElementById("result");
 const restart = document.getElementById("restart");
-const modal = document.querySelector(".modal");
+const modal = document.querySelector("modal");
 const scoreboard = {
   player: 0,
   computer: 0
 };
 
-// Play game
+// Play game funkcija, kad se klikne na neki od tri izbora
+
 function play(e) {
+  /* e je event */
+  /* console.log(e); */
+
   restart.style.display = "inline-block";
+
   const playerChoice = e.target.id;
   const computerChoice = getComputerChoice();
   const winner = getWinner(playerChoice, computerChoice);
   showWinner(winner, computerChoice);
+
+  /* console.log(playerChoice, computerChoice, winner); */
+
+  /* console.log(playerChoice, computerChoice); */
 }
 
 // Get computers choice
+
 function getComputerChoice() {
   const rand = Math.random();
   if (rand < 0.34) {
@@ -29,7 +39,7 @@ function getComputerChoice() {
   }
 }
 
-// Get game winner
+//Get game winner
 
 function getWinner(p, c) {
   if (p === c) {
@@ -57,32 +67,32 @@ function getWinner(p, c) {
 
 function showWinner(winner, computerChoice) {
   if (winner === "player") {
-    // Inc player score
+    // Increment player score
     scoreboard.player++;
-    // Show modal result
+    //Show modal result
     result.innerHTML = `
-    <h1 class="text-win">You Win</h1>
-    <img class="choice" src="./img/${computerChoice}.jpg" alt="">
-    <p>Computer Chose <strong>${computerChoice.charAt(0).toUpperCase() +
-      computerChoice.slice(1)}</strong></p>
-    `;
+
+        <h1 class="text-win">You Win!</h1>
+        <i class="fas fa-hand-${computerChoice} fa-10x"></i>
+        <p>Computer Chose <strong>${computerChoice}</strong>Rock</p>
+        `;
   } else if (winner === "computer") {
-    // Inc computer score
+    // Increment computer score
     scoreboard.computer++;
-    // Show modal result
+    //Show modal result
     result.innerHTML = `
-    <h1 class="text-lose">You Lose</h1>
-    <img class="choice" src="./img/${computerChoice}.jpg" alt="">
-    <p>Computer Chose <strong>${computerChoice.charAt(0).toUpperCase() +
-      computerChoice.slice(1)}</strong></p>
-    `;
+
+        <h1 class="text-lose">You Lose!</h1>
+        <i class="fas fa-hand-${computerChoice} fa-10x"></i>
+        <p>Computer Chose <strong>${computerChoice}</strong>Rock</p>
+        `;
   } else {
     result.innerHTML = `
-    <h1>It's A Draw</h1>
-    <img class="choice" src="./img/${computerChoice}.jpg" alt="">
-    <p>Computer Chose <strong>${computerChoice.charAt(0).toUpperCase() +
-      computerChoice.slice(1)}</strong></p>
-    `;
+
+        <h1>It's a draw!</h1>
+        <i class="fas fa-hand-${computerChoice} fa-10x"></i>
+        <p>Computer Chose <strong>${computerChoice}</strong>Rock</p>
+        `;
   }
 
   //Show score
@@ -90,19 +100,17 @@ function showWinner(winner, computerChoice) {
   <p>Player: ${scoreboard.player}</p>
   <p>Computer: ${scoreboard.computer}</p>
   `;
-
   modal.style.display = "block";
 }
+//Restart game
 
-// Restart game
-function restartGame(params) {
+function restartGame() {
   scoreboard.player = 0;
   scoreboard.computer = 0;
   score.innerHTML = `
   <p>Player: 0</p>
   <p>Computer: 0</p>
   `;
-  
 }
 
 //Clear modal
@@ -113,7 +121,6 @@ function clearModal(e) {
 }
 
 // Event listeners
-
 choices.forEach(choice => choice.addEventListener("click", play));
 window.addEventListener("click", clearModal);
 restart.addEventListener("click", restartGame);
